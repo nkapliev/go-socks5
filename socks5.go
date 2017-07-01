@@ -120,6 +120,9 @@ func (s *Server) Serve(l net.Listener) error {
 // ServeConn is used to serve a single connection.
 func (s *Server) ServeConn(conn net.Conn) error {
 	defer conn.Close()
+
+	s.config.Logger.Printf("[INFO]: Remote addr: %s", conn.RemoteAddr().String())
+
 	bufConn := bufio.NewReader(conn)
 
 	// Read the version byte

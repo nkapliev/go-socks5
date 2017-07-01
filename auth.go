@@ -102,7 +102,7 @@ func (a UserPassAuthenticator) Authenticate(reader io.Reader, writer io.Writer) 
 		if _, err := writer.Write([]byte{userAuthVersion, authFailure}); err != nil {
 			return nil, err
 		}
-		return nil, UserAuthFailed
+		return nil, fmt.Errorf("User authentication failed: %s:%s", string(user), string(pass))
 	}
 
 	// Done
